@@ -3,13 +3,11 @@ package br.com.queensburger.queensBurger.model;
 import java.util.Date;
 import java.util.List;
 
-import jakarta.persistence.Column;
-import jakarta.persistence.Entity;
-import jakarta.persistence.GeneratedValue;
-import jakarta.persistence.GenerationType;
-import jakarta.persistence.Id;
-import jakarta.persistence.OneToMany;
-import jakarta.persistence.Table;
+import jakarta.persistence.*;
+import org.hibernate.annotations.CreationTimestamp;
+import org.hibernate.annotations.UpdateTimestamp;
+import org.springframework.data.annotation.CreatedDate;
+import org.springframework.data.annotation.LastModifiedDate;
 
 @Entity
 @Table(name = "orders")
@@ -25,10 +23,13 @@ public class Order {
   @Column
   private Integer waiter;
 
-  @Column(name = "createdAt")
+
+  @CreatedDate
+  @Column(name = "created_at")
   private Date createdAt = new Date();
 
-  @Column(name = "updatedAt")
+  @LastModifiedDate
+  @Column(name = "updated_at")
   private Date updatedAt = new Date();
 
   @Column(name = "preparedOrder")
@@ -37,7 +38,7 @@ public class Order {
   @Column(name = "servedOrder")
   private Date servedOrder = new Date();
 
-  @OneToMany
+  @OneToMany(mappedBy = "order")
   private List<OrderProduct> products;
 
   public int getId() {
@@ -62,7 +63,7 @@ public class Order {
 
   public void setWaiter(Integer waiter) {
     this.waiter = waiter;
-  } 
+  }
 
   public Date getCreatedAt() {
     return createdAt;
