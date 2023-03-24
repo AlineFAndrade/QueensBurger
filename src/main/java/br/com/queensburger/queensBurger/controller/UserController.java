@@ -3,6 +3,7 @@ package br.com.queensburger.queensBurger.controller;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -13,6 +14,7 @@ import br.com.queensburger.queensBurger.model.User;
 import br.com.queensburger.queensBurger.service.UserService;
 import br.com.queensburger.queensBurger.service.duplicatedProductException;
 
+@CrossOrigin
 @RestController
 public class UserController {
   

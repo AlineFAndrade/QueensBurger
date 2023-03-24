@@ -1,5 +1,6 @@
 package br.com.queensburger.queensBurger.service;
 
+import java.util.List;
 import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -17,13 +18,13 @@ public class ProductServiceImpl implements ProductService {
 	@Override
 	public Product include(Product product) {
 		
-		 Optional<Product> prodWithSameId = repository.findByName(product.getName());
-		
-		 if(prodWithSameId.isEmpty()) {
+//		 Optional<Product> prodWithSameId = repository.findByName(product.getName());
+//		
+//		 if(prodWithSameId.isEmpty()) {
 			 return repository.save(product); 
-		 } else {
-			 return null;
-		 }
+//		 } else {
+//			 return null;
+//		 }
 	}
 
 	@Override
@@ -34,23 +35,22 @@ public class ProductServiceImpl implements ProductService {
 		if(resultFromDB.isPresent()) {
 			Product productFromDB = resultFromDB.get();
 			
-			int idFounded = product.getId();
-			Optional<Product> productWithSameId = repository.findById(idFounded);
+//			int idFounded = product.getId();
+//			Optional<Product> productWithSameId = repository.findById(idFounded);
+//			
+//			if(productWithSameId != null && productWithSameId.get().getId() != productFromDB.getId()) {
+//				throw new duplicatedProductException();
+//			}
 			
-			if(productWithSameId != null && productWithSameId.get().getId() != productFromDB.getId()) {
-				throw new duplicatedProductException();
-			}
-			
-			productFromDB.setId(product.getId());
-      productFromDB.setName(product.getName());
-      productFromDB.setFlavor(product.getFlavor());
-      productFromDB.setComplement(product.getComplement());
-      productFromDB.setPrice(product.getPrice());
-      productFromDB.setImage(product.getImage());
-      productFromDB.setType(product.getType());
-      productFromDB.setSubtype(product.getSubtype());
-      productFromDB.setCreatedAt(product.getCreatedAt());
-      productFromDB.setUpdatedAt(product.getUpdatedAt());
+	        productFromDB.setName(product.getName());
+	        productFromDB.setFlavor(product.getFlavor());
+	        productFromDB.setComplement(product.getComplement());
+	        productFromDB.setPrice(product.getPrice());
+	        productFromDB.setImage(product.getImage());
+	        productFromDB.setType(product.getType());
+	        productFromDB.setSubtype(product.getSubtype());
+	        productFromDB.setCreatedAt(product.getCreatedAt());
+	        productFromDB.setUpdatedAt(product.getUpdatedAt());
 			
 			return repository.save(productFromDB);
 		} else {
@@ -67,5 +67,15 @@ public class ProductServiceImpl implements ProductService {
 		} else {
 			return null;
 		}
+	}
+
+	@Override
+	public List<Product> getAll() {
+		return repository.findAll();
+	}
+
+	@Override
+	public void delete(int id) {
+		repository.deleteById(id);
 	}
 }
