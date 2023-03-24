@@ -7,16 +7,16 @@ import jakarta.persistence.*;
 public class OrderProduct {
 
     @EmbeddedId
-    private OrderProductsKey id; // <-- Essa é a chave composta.
+    private OrderProductsKey id;
 
     @ManyToOne
-    @MapsId("orderId") // <-- Esse aqui mapea o atributo da chave composta
-    @JoinColumn(name = "orderid") // <-- Esse aqui mapea o nome da coluna no banco
+    @MapsId("orderId") 
+    @JoinColumn(name = "orderid")
     private Order order;
 
     @ManyToOne
-    @MapsId("productId") // <-- Esse aqui mapea o atributo da chave composta
-    @JoinColumn(name = "productid") // <--  Esse aqui mapea o nome da coluna no banco
+    @MapsId("productId") 
+    @JoinColumn(name = "productid") 
     private Product product;
 
     @Column
